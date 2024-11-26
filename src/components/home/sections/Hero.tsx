@@ -42,6 +42,8 @@ const HomePage = () => {
         </div>
       </div>
       <BannerCarousel imageUrls={imageUrls} />
+
+      
     </div>
   );
 };

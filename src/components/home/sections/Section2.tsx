@@ -24,10 +24,56 @@ const Section2: React.FC<Section2Props> = ({ featuredProducts }) => {
     });
   });
 
+  const cardsData = [
+    {
+      name: "Mega spot",
+      location: "futo market",
+      imageUrl:
+        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1698983467/utilities/salad_oww6hs.png",
 
+      link: "/spots/megaspot",
+    },
+    {
+      name: "Mini spot",
+      location: "futo market",
+      imageUrl:
+        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1698983467/utilities/fast-food_kwqt4t.png",
+      link: "/spots/minispot",
+    },
+    {
+      name: "Ice creams",
+      location: "futo market",
+      imageUrl:
+        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1701378492/utilities/ice-cream_wscdf7.png",
+      link: "/spots/icecreamspot",
+    },
+    {
+      name: "Drink spot",
+      location: "futo market",
+      imageUrl:
+        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1701379774/utilities/cocktail_spthdi.png",
+      link: "/spots/drinkspot",
+    },
+  ];
 
   return (
     <div>
+      <div className=" container1 pt-[24px] xl:pt-[50px] grid grid-cols-4 gap-[24px] xl:gap-[30px]">
+        {cardsData.map((card, index) => (
+          <Link href="/producs" className=" flex flex-col items-center justify-center">
+            <div
+              key={index}
+              className=" w-full rounded-lg flex justify-center items-center bg-primary h-[50px] sm:h-[100px] p-2 "
+            >
+              <img src={card.imageUrl} alt="" className=" rounded-lg h-full " />
+            </div>
+            <div className=" hidden sm:flex text-center text-gray-500 text-[12px] w-wit truncate whitespace-nowrap">
+              {card.name}: {card.location}{" "}
+            </div>
+          </Link>
+        ))}
+      </div>
+
       <div className=" container1 pt-[24px] xl:pt-[50px]  text-p_black">
         {" "}
         <div
