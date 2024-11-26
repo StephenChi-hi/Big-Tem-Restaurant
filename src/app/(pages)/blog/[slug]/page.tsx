@@ -1,51 +1,93 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import { Metadata } from "next";
 import { db } from "@/lib/firebase"; // Firestore setup
 import { collection, getDocs } from "firebase/firestore";
 import { useParams } from "next/navigation";
 import BlogCard from "../../../../components/Blog/BlogCard";
-import Head from "next/head";
 import { format } from "date-fns";
 
-interface BlogValues {
+interface Blog {
   id: string;
   title: string;
+  content: string;
+  image: string;
+  date: string;
+  author: string;
   description: string;
   blogImageURL1: string;
   createdAt: string;
   seconds: any;
 }
 
-const BlogOverview: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-  const [blog, setBlog] = useState<BlogValues | null>(null);
-  const { slug } = useParams();
-  const [blogs, setBlogs] = useState<BlogValues[]>([]);
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const slug = params.slug;
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "blogs"));
-        const blogsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as BlogValues[];
+  // Fetch blogs data
+  const querySnapshot = await getDocs(collection(db, "blogs"));
+  const blogsData = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as Blog[];
 
-        const currentBlog = blogsData.find((b) => b.id === slug);
-        setBlog(currentBlog || null);
+  const currentBlog = blogsData.find((b) => b.id === slug);
 
-        // Filter out the current blog
-        setBlogs(blogsData.filter((b) => b.id !== slug));
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
-      } finally {
-        setLoading(false);
-      }
+  if (!currentBlog) {
+    return {
+      title: "Blog Not Found @ Lala Healthy Foods",
+      description: "The blog post you are looking for is not available.",
     };
+  }
 
-    fetchBlogs();
-  }, [slug]);
+  return {
+    title: `${currentBlog.title} @ Lala Healthy Foods`,
+    description: currentBlog.description.slice(0, 160), // First 160 characters as description
+    openGraph: {
+      title: currentBlog.title,
+      description: currentBlog.description.slice(0, 160),
+      images: [
+        {
+          url: currentBlog.blogImageURL1 || "/default-image.jpg",
+          alt: currentBlog.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: currentBlog.title,
+      description: currentBlog.description.slice(0, 160),
+      images: [currentBlog.blogImageURL1 || "/default-image.jpg"],
+    },
+  };
+}
+
+export default async function BlogPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const slug = params.slug;
+
+  // Fetch blogs data
+  const querySnapshot = await getDocs(collection(db, "blogs"));
+  const blogsData = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as Blog[];
+
+  const currentBlog = blogsData.find((b) => b.id === slug);
+
+  if (!currentBlog) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1>Blog Not Found</h1>
+      </div>
+    );
+  }
+
+  const relatedBlogs = blogsData.filter((b) => b.id !== slug);
 
   const processText = (text: string) => {
     return text
@@ -70,51 +112,39 @@ const BlogOverview: React.FC = () => {
       );
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (!blog) return <p>Blog not found.</p>;
-
   return (
     <div className="container1 mt-[60px] px-4 py-8 min-h-screen">
-      <Head>
-        {/* Dynamically set metadata based on product data */}
-        <title>{blog?.title} - Lala Healthy Foods</title>
-        <meta
-          name={blog?.title}
-          content={blog?.description || "blog description"}
-        />
-        <meta property="og:title" content={blog?.title} />
-        <meta property="og:description" content={blog?.description} />
-        <meta property="og:image" content={blog?.blogImageURL1} />
-        <meta name="twitter:title" content={blog?.title} />
-        <meta name="twitter:description" content={blog?.description} />
-        <meta name="twitter:image" content={blog?.blogImageURL1} />
-      </Head>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         {/* Blog Details */}
         <div className="sm:col-span-3">
-          <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
+          <h1 className="text-4xl font-bold mb-4">{currentBlog.title}</h1>
           <p className="text-gray-500 mb-2">
-            {blog.createdAt &&
-              // @ts-ignore
-              format(new Date(blog.createdAt.seconds * 1000), "do, MMMM yyyy")}
+            {currentBlog.createdAt &&
+              format(
+                // @ts-ignore
+                new Date(currentBlog.createdAt.seconds * 1000),
+                "do, MMMM yyyy"
+              )}
           </p>{" "}
           <div className="h-[300px] w-full my-4 flex border">
             <img
-              src={blog.blogImageURL1}
+              src={currentBlog.blogImageURL1}
               alt="Blog Cover"
               className="w-full h-full object-cover"
             />
           </div>
           <div
             className="prose"
-            dangerouslySetInnerHTML={{ __html: processText(blog.description) }}
+            dangerouslySetInnerHTML={{
+              __html: processText(currentBlog.description),
+            }}
           ></div>
         </div>
 
         {/* Related Blogs */}
         <div>
-          {blogs.length > 0
-            ? blogs.map((blog) => (
+          {relatedBlogs.length > 0
+            ? relatedBlogs.map((blog) => (
                 <BlogCard
                   key={blog.id}
                   title={blog.title}
@@ -135,6 +165,4 @@ const BlogOverview: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default BlogOverview;
+}

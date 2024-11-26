@@ -343,7 +343,8 @@ const Checkout: React.FC<CheckoutProps> = ({
     subaccount: [
       {
         id: "RS_67FFC93A2357236ED7DA789CC76655E1",
-        transaction_split_ratio: "2",
+        transaction_charge_type: "flat_subaccount",
+        transaction_charge: 100,
       },
     ],
     customer: {

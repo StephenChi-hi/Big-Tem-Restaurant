@@ -29,7 +29,7 @@ const Section2: React.FC<Section2Props> = ({ featuredProducts }) => {
       name: "Mega spot",
       location: "futo market",
       imageUrl:
-        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1698983467/utilities/salad_oww6hs.png",
+        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1732620784/utilities/IMG_0295_kspmax.jpg",
 
       link: "/spots/megaspot",
     },
@@ -37,21 +37,21 @@ const Section2: React.FC<Section2Props> = ({ featuredProducts }) => {
       name: "Mini spot",
       location: "futo market",
       imageUrl:
-        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1698983467/utilities/fast-food_kwqt4t.png",
+        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1732620768/utilities/MIQLDU2FKRFBBJNXS7DJ6JGICE_amqoqf.avif",
       link: "/spots/minispot",
     },
     {
       name: "Ice creams",
       location: "futo market",
       imageUrl:
-        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1701378492/utilities/ice-cream_wscdf7.png",
+        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1732620766/utilities/p03w4lng_cl9yba.jpg",
       link: "/spots/icecreamspot",
     },
     {
       name: "Drink spot",
       location: "futo market",
       imageUrl:
-        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1701379774/utilities/cocktail_spthdi.png",
+        "https://res.cloudinary.com/dcb4ilgmr/image/upload/v1732620768/utilities/get-15_kdaolr.jpg",
       link: "/spots/drinkspot",
     },
   ];
@@ -66,9 +66,15 @@ const Section2: React.FC<Section2Props> = ({ featuredProducts }) => {
           >
             <div
               key={index}
-              className=" w-full rounded-lg flex justify-center items-center bg-primary h-[80px] sm:h-[100px] p-2 "
+              className=" relative w-full rounded-lg overflow-hidden flex justify-center items-center bg-primary h-[80px] sm:h-[100px] p-2 "
             >
-              <img src={card.imageUrl} alt="" className=" rounded-lg h-full " />
+              {/* <img src={card.imageUrl} alt="" className=" rounded-lg h-full z-10" /> */}
+
+              <img
+                src={card.imageUrl}
+                alt=""
+                className=" absolute flex w-full h-full object-cover opacity-55 rounded-lg"
+              />
             </div>
             <div className=" hidde sm:flex text-center text-gray-500 text-[12px] w-wit truncate whitespace-nowrap">
               {card.name}: {card.location}{" "}

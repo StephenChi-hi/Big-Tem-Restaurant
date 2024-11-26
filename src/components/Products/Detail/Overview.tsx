@@ -5,7 +5,6 @@ import ProductCard from "../ProductCard";
 import { Header4, Header5, ParagraphLink1 } from "@/components/Text";
 import Button from "@/components/Button";
 import Section6 from "@/components/home/sections/Section6";
-import Head from "next/head"; 
 import { useParams } from "next/navigation";
 import { db } from "@/lib/firebase";
 import {
@@ -112,20 +111,7 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <Head>
-        {/* Dynamically set metadata based on product data */}
-        <title>{product?.name} - Lala Healthy Foods</title>
-        <meta
-          name="description"
-          content={product?.description || "Product description"}
-        />
-        <meta property="og:title" content={product?.name} />
-        <meta property="og:description" content={meta_des} />
-        <meta property="og:image" content={product?.productImageURL1} />
-        <meta name="twitter:title" content={product?.name} />
-        <meta name="twitter:description" content={product?.description} />
-        <meta name="twitter:image" content={product?.productImageURL1} />
-      </Head>
+      
       <div className="container mx-auto px-4 py-[100px]">
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 bg-white p-2 py-4 sm:p-8 rounded-lg">
           {/* Right section - Product Images */}

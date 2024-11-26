@@ -81,20 +81,7 @@ const BlogOverview: React.FC = () => {
 
   return (
     <div className="container1 mt-[60px] px-4 py-8 min-h-screen">
-      <Head>
-        {/* Dynamically set metadata based on product data */}
-        <title>{blog?.title} - Lala Healthy Foods</title>
-        <meta
-          name="description"
-          content={blog?.description || "blog description"}
-        />
-        <meta property="og:title" content={blog?.title} />
-        <meta property="og:description" content={blog?.description} />
-        <meta property="og:image" content={blog?.blogImageURL1} />
-        <meta name="twitter:title" content={blog?.title} />
-        <meta name="twitter:description" content={blog?.description} />
-        <meta name="twitter:image" content={blog?.blogImageURL1} />
-      </Head>
+   
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         {/* Blog Details */}
         <div className="sm:col-span-3">
