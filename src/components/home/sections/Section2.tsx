@@ -58,12 +58,15 @@ const Section2: React.FC<Section2Props> = ({ featuredProducts }) => {
 
   return (
     <div>
-      <div className=" container1 pt-[24px] xl:pt-[50px] grid grid-cols-4 gap-[24px] xl:gap-[30px]">
+      <div className=" container1 pt-[24px] xl:pt-[50px] grid grid-cols- sm: grid-cols-4 gap-[24px] xl:gap-[30px]">
         {cardsData.map((card, index) => (
-          <Link href="/producs" className=" flex flex-col items-center justify-center">
+          <Link
+            href="/products"
+            className=" flex flex-col items-center justify-center"
+          >
             <div
               key={index}
-              className=" w-full rounded-lg flex justify-center items-center bg-primary h-[50px] sm:h-[100px] p-2 "
+              className=" w-full rounded-lg flex justify-center items-center bg-primary h-[80px] sm:h-[100px] p-2 "
             >
               <img src={card.imageUrl} alt="" className=" rounded-lg h-full " />
             </div>
