@@ -63,9 +63,8 @@ const Section2: React.FC<Section2Props> = ({ featuredProducts }) => {
           Lala <span className="text-primary">Spots</span>
         </Header3>
         <Paragraph1 className="max-w-[883px] text-center">
-          Explore our curated meal categories, from hearty food to
-          refreshing drinks snacks, and ice-cream treats,
-          all in one place.{" "}
+          Discover delicious meal spots curated to satisfy every craving, all in
+          one place
         </Paragraph1>
       </div>
 
