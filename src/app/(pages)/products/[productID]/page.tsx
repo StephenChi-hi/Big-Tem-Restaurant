@@ -67,6 +67,8 @@ export default async function ProductDetail({
   }
 
   const product = productSnap.data();
+
+  
   return (
     <div className="pt-[5000px]- min-h-screen">
       <Overview />

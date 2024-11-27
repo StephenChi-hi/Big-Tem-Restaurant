@@ -58,7 +58,13 @@ const Section2: React.FC<Section2Props> = ({ featuredProducts }) => {
 
   return (
     <div>
-      <div className=" container1 pt-[24px] xl:pt-[50px] grid grid-cols-2 sm:grid-cols-4 gap-[24px] xl:gap-[30px]">
+      <div className=" flex pt-[24px] xl:pt-[40px]  justify-center items-center container1 border-b-2 border-secondary  ">
+        <Header3 className=" text-center ">
+          Lala <span className="text-primary">Spots</span> 
+        </Header3>
+      </div>
+
+      <div className=" pt-[14px]  container1 grid grid-cols-2 sm:grid-cols-4 gap-[24px] xl:gap-[30px]">
         {cardsData.map((card, index) => (
           <Link
             href="/products"
