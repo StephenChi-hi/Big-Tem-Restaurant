@@ -58,10 +58,15 @@ const Section2: React.FC<Section2Props> = ({ featuredProducts }) => {
 
   return (
     <div>
-      <div className=" flex pt-[24px] xl:pt-[40px]  justify-center items-center container1 border-b-2 border-secondary  ">
+      <div className=" text-p_black flex flex-col pt-[24px] xl:pt-[40px]  justify-center items-center container1 border-b-2- border-secondary  ">
         <Header3 className=" text-center ">
-          Lala <span className="text-primary">Spots</span> 
+          Lala <span className="text-primary">Spots</span>
         </Header3>
+        <Paragraph1 className="max-w-[883px] text-center">
+          Explore our curated meal categories, from hearty food to
+          refreshing drinks snacks, and ice-cream treats,
+          all in one place.{" "}
+        </Paragraph1>
       </div>
 
       <div className=" pt-[14px]  container1 grid grid-cols-2 sm:grid-cols-4 gap-[24px] xl:gap-[30px]">

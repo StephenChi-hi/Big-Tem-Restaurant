@@ -59,7 +59,7 @@ const BannerCarousel: React.FC<BannerCarouselProps> = ({ imageUrls }) => {
             key={index}
             src={image.src}
             alt={`Banner ${index + 1}`}
-            className={`absolute top-0 left-0 w-[100%] mx-auto sm:h-[250px] opacity-75 h-[250px] transition-transform duration-500 ${
+            className={`absolute top-0 left-0 w-[100%] mx-auto sm:h-[250px] opacity-85 h-[250px] transition-transform duration-500 ${
               index === currentIndex ? "translate-x-0" : "translate-x-full"
             }`}
           />
