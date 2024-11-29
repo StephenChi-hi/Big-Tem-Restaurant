@@ -13,7 +13,7 @@ const HomePage = () => {
 
   return (
     <div className="  ">
-      <div className="bg-black text-white pt-[60px]  ">
+      <div className="bg-black text-white pt-[80px]  ">
         <div className="flex py-2 container1">
           <div className="">
             <svg
