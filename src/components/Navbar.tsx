@@ -61,12 +61,10 @@ function Navbar() {
               />
             </button>
           </div>
-          <img src="/images/logo.png" alt="" className="h-[30px]" />
-          {/* <div className=" relative">
-            {" "}
-            <div className=" border-2 border-primary rounded-full w-2 h-2 p- absolute top-1 -left-1 "></div>
-            <HeaderAny className=" text-[24px]">GrandioseGrin</HeaderAny>{" "}
-          </div> */}
+         <Link href="/">
+                        <img src="/images/logo.png" alt="" className="h-[50px]" />
+
+            </Link>
           <div className="  gap-[48px] items-center hidden lg:flex">
             <Link href="/">
               <ParagraphLink1
