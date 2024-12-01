@@ -769,7 +769,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                     onChange={handleChange}
                     className="form-checkbox min-h-5 min-w-5 text-orange-500 appearance-none checked:bg-primary checked:border-transparent focus:outline-none border border-primary rounded checked:after:content-['✓'] checked:after:text-white checked:after:text-xs checked:after:flex checked:after:justify-center"
                   />
-                  <span>Standard Shipping</span>
+                  <span>Standard shipping</span>
                 </label>
                 {/* user location */}
                 {shippingMethod === "Standard" && (
