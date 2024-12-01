@@ -51,10 +51,10 @@ function Navbar() {
       <div className="  w-full">
         <div className=" container1 flex justify-between font-semibold- w-full items-center">
           <div className="lg:hidden">
-            <button onClick={toggleMenu} className="focus:outline-none">
+            <button onClick={toggleMenu} className="focus:outline-none ">
               <Image
                 height={2}
-                width={35}
+                width={25}
                 src={menuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
                 alt="menu"
                 className=""
