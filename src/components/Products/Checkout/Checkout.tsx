@@ -318,7 +318,8 @@ const Checkout: React.FC<CheckoutProps> = ({
     }
 
     // Clear the cart
-    // clearCart();
+    clearCart();
+    // window.location.href = "/";
   };
 
   useEffect(() => {
@@ -407,9 +408,9 @@ const Checkout: React.FC<CheckoutProps> = ({
 
   // @ts-ignore
 
-   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-     setShippingMethod(event.target.value); // Update state based on the selected value
-   };
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setShippingMethod(event.target.value); // Update state based on the selected value
+  };
   return (
     <div className="  space-y-6 bg-white sm:p-4 p-0 relative rounded-lg">
       {isloading && (
@@ -812,11 +813,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                   <p>
                     Your payment was declined. Please{" "}
                     <span
-                      onClick={() => {
-                        if (typeof window !== "undefined") {
-                          window.location.reload();
-                        }
-                      }}
+                      // onClick={() => window.location.reload()}
                       className=" text-primary underline cursor-pointer"
                     >
                       try again later.{" "}
@@ -830,11 +827,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                   <p>
                     Your payment was canceled by you. Please{" "}
                     <span
-                      onClick={() => {
-                        if (typeof window !== "undefined") {
-                          window.location.reload();
-                        }
-                      }}
+                      // onClick={() => window.location.reload()}
                       className=" text-primary underline cursor-pointer"
                     >
                       try again later.{" "}
