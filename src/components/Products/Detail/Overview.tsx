@@ -16,6 +16,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import useCartStore from "@/stores/cartStore";
+import CopyUrlButton from "./CopyUrlButton";
 
 interface Product {
   id: string;
@@ -111,7 +112,6 @@ const ProductDetail = () => {
 
   return (
     <div>
-      
       <div className="container mx-auto px-4 py-[100px]">
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 bg-white p-2 py-4 sm:p-8 rounded-lg">
           {/* Right section - Product Images */}
@@ -158,17 +158,22 @@ const ProductDetail = () => {
                 </p>
               )}
             </div>
-            {product.availableAmount === 0 ? (
-              <div className="py-2 flex w-full justify-center sm:hidden items-center rounded-lg bg-black text-white text-center">
-                Out of Stock
-              </div>
-            ) : (
-              <Button
-                text="Add to Cart"
-                onClick={handleAddToCart}
-                additionalClasses="border-white bg-black w-full flex justify-center sm:hidden"
-              />
-            )}
+            <div className=" flex justify-between sm:hidden my-2 gap-2 items-center">
+              {product.availableAmount === 0 ? (
+                <div className="py-2 flex w-full justify-center items-center rounded-lg bg-black text-white text-center">
+                  Out of Stock
+                </div>
+              ) : (
+                <Button
+                  text="Add to Cart"
+                  onClick={handleAddToCart}
+                  additionalClasses="border-white bg-black w-full flex justify-center "
+                />
+              )}
+
+              <CopyUrlButton />
+            </div>
+            
             <hr className="mb-6" />
 
             <div className=" flex gap-2 mb-4 text-gray-600 text-[12px]">

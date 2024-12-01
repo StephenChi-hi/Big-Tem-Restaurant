@@ -17,6 +17,7 @@ import html2canvas from "html2canvas";
 import { useExchangeRateStore } from "@/stores/exchangeRateStore";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { HeaderAny, ParagraphLink1, ParagraphLink2 } from "@/components/Text";
+import { usePaystackPayment } from "react-paystack";
 
 type Product = {
   id: number;
@@ -96,7 +97,7 @@ const Checkout: React.FC<CheckoutProps> = ({
     note: "",
   });
 
-  const [shippingMethod, setShippingMethod] = useState("");
+  const [shippingMethod, setShippingMethod] = useState("Standard");
   const clearCart = useCartStore((state) => state.clearCart);
   const [isloading, setIsLoading] = useState(false);
   const [countries, setCountries] = useState<Country[]>([]);
@@ -240,6 +241,7 @@ const Checkout: React.FC<CheckoutProps> = ({
         shipped: false,
         returned: false,
         shippingFee: totalShippingFee,
+        shippingMethod: shippingMethod,
         totalPaid: totalBill,
         products: sanitizedProducts, // Use sanitized products
       });
@@ -362,6 +364,52 @@ const Checkout: React.FC<CheckoutProps> = ({
   // @ts-ignore
   const handleFlutterPayment = useFlutterwave(config);
 
+  // Paystack Config
+  const publicKey1 = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY;
+
+  // @ts-ignore
+  const totalBillWave2 = totalBillWave * 100;
+
+  const config1 = {
+    reference: `${Date.now()}`,
+    email,
+    amount: totalBillWave2, // Paystack expects the amount in kobo for NGN or cents for USD
+    currency: currencyWave,
+    publicKey: publicKey1,
+    channels: ["card", "bank", "ussd"],
+    subaccount: "ACCT_xci71zt72zt99wp", // Subaccount ID
+    metadata: {
+      custom_fields: [
+        {
+          display_name: `${firstName} ${lastName}`,
+          variable_name: "customer_name",
+          value: `${firstName} ${lastName}`,
+        },
+      ],
+    },
+  };
+
+  // @ts-ignore
+  const initializePayment = usePaystackPayment(config1);
+
+  const onSuccess = (reference: { reference: string }) => {
+    console.log("Payment Successful:", reference);
+    const PaymentRef = reference.reference;
+    setPaymentResponse(PaymentRef);
+    submitOrderToFirestore(shippingInfo);
+    setActiveTab(2);
+  };
+
+  const onClose = () => {
+    setCanceledPay(true);
+    console.log("Payment closed by user.");
+  };
+
+  // @ts-ignore
+
+   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+     setShippingMethod(event.target.value); // Update state based on the selected value
+   };
   return (
     <div className="  space-y-6 bg-white sm:p-4 p-0 relative rounded-lg">
       {isloading && (
@@ -605,7 +653,11 @@ const Checkout: React.FC<CheckoutProps> = ({
                 </div>
               </div>
               <div className="flex items-center text-[12px]">
-                <Field type="checkbox" name="saveInfo" className="mr-2" />
+                <Field
+                  type="checkbox"
+                  name="saveInfo"
+                  className="form-checkbox min-h-4 mr-2 min-w-4 text-orange-500 appearance-none checked:bg-primary checked:border-transparent focus:outline-none border border-primary rounded checked:after:content-['✓'] checked:after:text-white checked:after:text-xs checked:after:flex checked:after:justify-center"
+                />
                 <ParagraphLink2>
                   Save this information for next time
                 </ParagraphLink2>
@@ -655,55 +707,145 @@ const Checkout: React.FC<CheckoutProps> = ({
               {shippingInfo.state}, {shippingInfo.zipCode}
             </p>
 
-            {paymentDenied && (
-              <div className=" flex p-4 items-center h-[200px] w-full  justify-center rounded-lg border mt-4 bg-white bg-opacity-50 z-50">
-                Your payment was declined. Please try again later.{" "}
-              </div>
-            )}
+            <div className="min-h-[200px] ">
+              <HeaderAny className="font-semibold text-16px text-gray-700">
+                Select Shipping Method
+              </HeaderAny>
+              <div className="flex flex-col space-y-4 mt-2">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="shippingMethod"
+                    value="Pickup"
+                    checked={shippingMethod === "Pickup"}
+                    onChange={() => setShippingMethod("Pickup")}
+                    className="form-checkbox min-h-5 min-w-5  appearance-none checked:bg-primary checked:border-transparent focus:outline-none border border-primary- rounded checked:after:content-['✓'] checked:after:text-white checked:after:text-xs checked:after:flex checked:after:justify-center"
+                    disabled
+                  />
+                  <span className=" text-gray-400">
+                    Drone delivery (currently unavailable)
+                  </span>
+                </label>
+                {/* store location */}
+                {shippingMethod === "Pickup" && (
+                  <div>
+                    <div className="flex text-gray-600 gap-2 items-start w-full p-2 rounded-lg bg-gray-100">
+                      <div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                          />
+                        </svg>
+                      </div>
+                      <p>
+                        17 Raphael Street Abule-Oshun, <br /> Ojo, <br /> Lagos
+                        State, <br /> Nigeria
+                      </p>
+                    </div>
+                  </div>
+                )}
 
-            {canceledPay && (
-              <div className=" flex p-4 items-center justify-center h-[200px] w-full rounded-lg border mt-4 bg-white bg-opacity-50 z-50">
-                Your payment was canceled by you. You may try again later.{" "}
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="shippingMethod"
+                    value="Standard"
+                    checked={shippingMethod === "Standard"}
+                    onChange={handleChange}
+                    className="form-checkbox min-h-5 min-w-5 text-orange-500 appearance-none checked:bg-primary checked:border-transparent focus:outline-none border border-primary rounded checked:after:content-['✓'] checked:after:text-white checked:after:text-xs checked:after:flex checked:after:justify-center"
+                  />
+                  <span>Standard Shipping</span>
+                </label>
+                {/* user location */}
+                {shippingMethod === "Standard" && (
+                  <div>
+                    <div className="flex gap-2 text-gray-600 items-start w-full p-2 rounded-lg bg-gray-100">
+                      <div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                          />
+                        </svg>
+                      </div>
+                      <p>
+                        {shippingInfo.address}, {shippingInfo.city},{" "}
+                        {shippingInfo.state}, {shippingInfo.zipCode}
+                        <br />
+                        <br />
+                        Estimated Time: 15 - 45 min
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          <div className="min-h-[500px] hidden">
-            <HeaderAny className="font-semibold text-16px text-gray-700">
-              Select Shipping Method
-            </HeaderAny>
-            <div className="flex space-x-4 mt-2">
-              <label className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  name="shippingMethod"
-                  value="Pickup"
-                  checked={shippingMethod === "Pickup"}
-                  onChange={() => setShippingMethod("Pickup")}
-                  className="text-primary focus:ring-blue-500"
-                />
-                <span>Pickup</span>
-              </label>
-              <label className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  name="shippingMethod"
-                  value="Standard"
-                  checked={shippingMethod === "Standard"}
-                  onChange={() => setShippingMethod("Standard")}
-                  className="text-primary focus:ring-blue-500"
-                />
-                <span>Standard Shipping</span>
-              </label>
+              {paymentDenied && (
+                <div className=" flex p-4 items-center h-[200px] w-full  justify-center rounded-lg border mt-4 bg-white bg-opacity-50 z-50">
+                  <p>
+                    Your payment was declined. Please{" "}
+                    <span
+                      onClick={() => window.location.reload()}
+                      className=" text-primary underline cursor-pointer"
+                    >
+                      try again later.{" "}
+                    </span>
+                  </p>
+                </div>
+              )}
+
+              {canceledPay && (
+                <div className=" flex p-4 items-center justify-center h-[200px] w-full rounded-lg border mt-4 bg-white bg-opacity-50 z-50">
+                  <p>
+                    Your payment was canceled by you. Please{" "}
+                    <span
+                      onClick={() => window.location.reload()}
+                      className=" text-primary underline cursor-pointer"
+                    >
+                      try again later.{" "}
+                    </span>
+                  </p>
+                </div>
+              )}
             </div>
           </div>
-          <div className="flex justify-between">
+
+          <div className="sm:flex-row flex flex-col gap-4 justify-between">
             <button
               onClick={handleBack}
-              className="w-full  font-bold bg-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-400"
+              className="w-full  font-bold- bg-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-400"
             >
               <ParagraphLink2>Back</ParagraphLink2>
             </button>
+
+            {/* Payment Flutter Wave button*/}
             <button
               onClick={() => {
                 handleFlutterPayment({
@@ -724,9 +866,19 @@ const Checkout: React.FC<CheckoutProps> = ({
                   },
                 });
               }}
-              className="w-full font-bold bg-primary text-white p-2 rounded-md hover:bg-black ml-4"
+              className="w-full hidden- font-bold bg-primary text-white p-2 rounded-md hover:bg-black "
             >
               <ParagraphLink2>Proceed to Payment</ParagraphLink2>{" "}
+            </button>
+
+            {/* Payment button paystack  */}
+            <button
+              onClick={() => {
+                initializePayment({ onSuccess, onClose });
+              }}
+              className="w-full font-bold bg-primary text-white p-2 rounded-md hover:bg-black "
+            >
+              <ParagraphLink2>Proceed to Payment</ParagraphLink2>
             </button>
           </div>
         </div>

@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             {}
           ).format(Number(formattedPrice))}`}</Paragraph2>
           {product.availableAmount === 0 ? (
-            <div className="py-2 flex px-2 justify-center  text-[13px]  w-full  items-center rounded-lg bg-black text-white text-center">
+            <div className="py-1 flex px-2 justify-center  text-[13px]  w-full  items-center rounded-lg bg-black text-white text-center">
               Cooking...
             </div>
           ) : (

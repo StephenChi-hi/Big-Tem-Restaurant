@@ -247,7 +247,7 @@ function Overview() {
         </div>
         {/* data-aos="fade-right" */}
 
-        <div className="grid grid-cols-2 xl:grid-cols-5 sm:grid-cols-1 gap-[24px] xl:gap-[30px] ">
+        <div className="grid grid-cols-2 xl:grid-cols-5 sm:grid-cols-1 gap-4 xl:gap-[30px] ">
           {displayedProducts.length > 0 ? (
             displayedProducts.map((product) => (
               <ProductCard
