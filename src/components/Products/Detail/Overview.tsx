@@ -112,11 +112,11 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <div className="container mx-auto px-4 py-[100px]">
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 bg-white p-2 py-4 sm:p-8 rounded-lg">
+      <div className="container mx-auto px-4 py-[80px] sm:py-[100px]">
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 bg-white p-2 py-4- sm:p-8 rounded-lg">
           {/* Right section - Product Images */}
           <div className="sm:col-span-3">
-            <div className="w-full sm:h-[500px] rounded-lg mb-4 flex items-center justify-center">
+            <div className="w-full sm:h-[500px] h-[200px] rounded-lg mb-4 flex items-center justify-center">
               <img
                 src={selectedImage!.replace(
                   "/upload/",
@@ -173,7 +173,7 @@ const ProductDetail = () => {
 
               <CopyUrlButton />
             </div>
-            
+
             <hr className="mb-6" />
 
             <div className=" flex gap-2 mb-4 text-gray-600 text-[12px]">
