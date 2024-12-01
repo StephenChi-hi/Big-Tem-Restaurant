@@ -116,14 +116,14 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 bg-white p-2 py-4- sm:p-8 rounded-lg">
           {/* Right section - Product Images */}
           <div className="sm:col-span-3">
-            <div className="w-full sm:h-[500px] h-[200px] rounded-lg mb-4 flex items-center justify-center">
+            <div className="w-full sm:h-[500px] h-[250px] rounded-lg mb-4 flex items-center justify-center">
               <img
                 src={selectedImage!.replace(
                   "/upload/",
                   "/upload/w_1000,f_auto/"
                 )}
                 alt="Selected Product"
-                className="max-h-full w-full rounded-lg object-contain"
+                className="h-full w-full rounded-lg object-cover"
               />
             </div>
             <div className="flex gap-2 w-full overflow-hidden overflow-x-auto scrollbar-hide p-1">
