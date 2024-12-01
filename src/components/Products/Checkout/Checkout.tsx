@@ -812,7 +812,11 @@ const Checkout: React.FC<CheckoutProps> = ({
                   <p>
                     Your payment was declined. Please{" "}
                     <span
-                      onClick={() => window.location.reload()}
+                      onClick={() => {
+                        if (typeof window !== "undefined") {
+                          window.location.reload();
+                        }
+                      }}
                       className=" text-primary underline cursor-pointer"
                     >
                       try again later.{" "}
@@ -826,7 +830,11 @@ const Checkout: React.FC<CheckoutProps> = ({
                   <p>
                     Your payment was canceled by you. Please{" "}
                     <span
-                      onClick={() => window.location.reload()}
+                      onClick={() => {
+                        if (typeof window !== "undefined") {
+                          window.location.reload();
+                        }
+                      }}
                       className=" text-primary underline cursor-pointer"
                     >
                       try again later.{" "}
