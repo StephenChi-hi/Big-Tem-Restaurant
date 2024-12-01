@@ -319,7 +319,7 @@ const Checkout: React.FC<CheckoutProps> = ({
 
     // Clear the cart
     clearCart();
-    // window.location.href = "/";
+    window.location.href = "/";
   };
 
   useEffect(() => {
@@ -813,7 +813,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                   <p>
                     Your payment was declined. Please{" "}
                     <span
-                      // onClick={() => window.location.reload()}
+                      onClick={() => window.location.reload()}
                       className=" text-primary underline cursor-pointer"
                     >
                       try again later.{" "}
@@ -827,7 +827,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                   <p>
                     Your payment was canceled by you. Please{" "}
                     <span
-                      // onClick={() => window.location.reload()}
+                      onClick={() => window.location.reload()}
                       className=" text-primary underline cursor-pointer"
                     >
                       try again later.{" "}
@@ -877,7 +877,7 @@ const Checkout: React.FC<CheckoutProps> = ({
               onClick={() => {
                 initializePayment({ onSuccess, onClose });
               }}
-              className="w-full font-bold bg-primary text-white p-2 rounded-md hover:bg-black "
+              className="w-full hidden font-bold bg-primary text-white p-2 rounded-md hover:bg-black "
             >
               <ParagraphLink2>Proceed to Payment</ParagraphLink2>
             </button>
