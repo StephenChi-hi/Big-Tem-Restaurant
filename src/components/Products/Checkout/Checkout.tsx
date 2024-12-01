@@ -366,45 +366,45 @@ const Checkout: React.FC<CheckoutProps> = ({
   const handleFlutterPayment = useFlutterwave(config);
 
   // Paystack Config
-  const publicKey1 = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY;
+  // const publicKey1 = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY;
 
   // @ts-ignore
-  const totalBillWave2 = totalBillWave * 100;
+  // const totalBillWave2 = totalBillWave * 100;
 
-  const config1 = {
-    reference: `${Date.now()}`,
-    email,
-    amount: totalBillWave2, // Paystack expects the amount in kobo for NGN or cents for USD
-    currency: currencyWave,
-    publicKey: publicKey1,
-    channels: ["card", "bank", "ussd"],
-    subaccount: "ACCT_xci71zt72zt99wp", // Subaccount ID
-    metadata: {
-      custom_fields: [
-        {
-          display_name: `${firstName} ${lastName}`,
-          variable_name: "customer_name",
-          value: `${firstName} ${lastName}`,
-        },
-      ],
-    },
-  };
+  // const config1 = {
+  //   reference: `${Date.now()}`,
+  //   email,
+  //   amount: totalBillWave2, // Paystack expects the amount in kobo for NGN or cents for USD
+  //   currency: currencyWave,
+  //   publicKey: publicKey1,
+  //   channels: ["card", "bank", "ussd"],
+  //   subaccount: "ACCT_xci71zt72zt99wp", // Subaccount ID
+  //   metadata: {
+  //     custom_fields: [
+  //       {
+  //         display_name: `${firstName} ${lastName}`,
+  //         variable_name: "customer_name",
+  //         value: `${firstName} ${lastName}`,
+  //       },
+  //     ],
+  //   },
+  // };
 
-  // @ts-ignore
-  const initializePayment = usePaystackPayment(config1);
+  // // @ts-ignore
+  // const initializePayment = usePaystackPayment(config1);
 
-  const onSuccess = (reference: { reference: string }) => {
-    console.log("Payment Successful:", reference);
-    const PaymentRef = reference.reference;
-    setPaymentResponse(PaymentRef);
-    submitOrderToFirestore(shippingInfo);
-    setActiveTab(2);
-  };
+  // const onSuccess = (reference: { reference: string }) => {
+  //   console.log("Payment Successful:", reference);
+  //   const PaymentRef = reference.reference;
+  //   setPaymentResponse(PaymentRef);
+  //   submitOrderToFirestore(shippingInfo);
+  //   setActiveTab(2);
+  // };
 
-  const onClose = () => {
-    setCanceledPay(true);
-    console.log("Payment closed by user.");
-  };
+  // const onClose = () => {
+  //   setCanceledPay(true);
+  //   console.log("Payment closed by user.");
+  // };
 
   // @ts-ignore
 
@@ -873,14 +873,14 @@ const Checkout: React.FC<CheckoutProps> = ({
             </button>
 
             {/* Payment button paystack  */}
-            <button
+            {/* <button
               onClick={() => {
                 initializePayment({ onSuccess, onClose });
               }}
               className="w-full hidden font-bold bg-primary text-white p-2 rounded-md hover:bg-black "
             >
               <ParagraphLink2>Proceed to Payment</ParagraphLink2>
-            </button>
+            </button> */}
           </div>
         </div>
       )}
