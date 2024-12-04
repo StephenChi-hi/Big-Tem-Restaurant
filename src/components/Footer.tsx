@@ -137,7 +137,7 @@ function Footer() {
                   />
                 </svg>
 
-                <Paragraph2> grandiosegrin@gmail.com</Paragraph2>
+                <Paragraph2> lalafoods@gmail.com</Paragraph2>
               </div>
               <div className=" flex items-center gap-2 text-[#ECECEC] ">
                 <svg
@@ -155,7 +155,7 @@ function Footer() {
                   />
                 </svg>
 
-                <Paragraph2> +234 707 832 8640</Paragraph2>
+                <Paragraph2> +234 916 002 4929</Paragraph2>
               </div>
             </div>
           </div>
