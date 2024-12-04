@@ -17,15 +17,16 @@ function Overview() {
     <div className="pt-[20px] bg-bg_gray">
       <div data-aos="flip-right" className="container1">
         <div className="relative overflow-hidden">
-          <div className="flex flex-col bg-primary sm:gap-[20px] px-4 sm:p-[65px] py-12 sm:py- rounded-t-[24px] w-full sm:text-center text-white">
+          <div className="flex flex-col bg-primary sm:gap-[20px] px-4 sm:p-[65px] py-12 mt-[50px] w-full sm:text-center text-white">
             <Header1Plus>Privacy Policy</Header1Plus>
             <Paragraph3>
-              At GrandioseGrin, your privacy is our priority. This policy
-              explains how we collect, use, and safeguard your personal
-              information when you shop with us or interact with our website.
+              At Lala Healthy Foods, we value your privacy and are committed to
+              protecting your personal information. This policy outlines how we
+              collect, use, and safeguard your data when you use our website and
+              services.
             </Paragraph3>
           </div>
-          <div className="absolute sm:-bottom-[200px] -bottom-[60px] overflow-hidden flex w-full">
+          <div className="absolute sm:-bottom-[200px] -bottom-[60px] overflow-hidden hidden f.lex w-full">
             <img
               className="min-w-full"
               src="/images/white_bgR.svg"
@@ -42,14 +43,15 @@ function Overview() {
             <Paragraph1>
               To provide the best experience at GrandioseGrin, we may collect:
               <br />
-              - Personal Details: Name, email, phone number, and address
-              provided during account creation or checkout.
+              - Personal Details: When you place an order or create an account,
+              we may collect your name, email address, phone number, and
+              delivery address.
               <br />
-              - Purchase Data: Products bought and preferences to recommend
-              tailored solutions.
-              <br />- Cookies: Used to personalize your shopping experience and
-              enhance website performance. Manage these via your browser
-              settings.
+              - Purchase Data: Payment information such as credit/debit card
+              details is collected securely through trusted payment gateways.
+              <br />- Cookies: We collect data on how you interact with our
+              website, including IP addresses, browser types, and pages visited,
+              to improve your experience.
             </Paragraph1>
           </div>
 
@@ -85,12 +87,42 @@ function Overview() {
               Sharing Your Information
             </ParagraphLink1>
             <Paragraph1>
-              Your information is not sold or shared except:
+              - We do not sell or rent your personal information to third
+              parties.
               <br />
-              - With Trusted Vendors: To facilitate payment processing,
-              shipping, and other essential services.
-              <br />- For Legal Compliance: When required by law or to protect
-              our rights.
+              - Information may be shared with delivery partners to fulfill your
+              orders.
+              <br />- We may disclose information if required by law or to
+              protect our rights and the safety of our users.
+            </Paragraph1>
+          </div>
+
+          <div>
+            <ParagraphLink1 className="font-bold text-primary">
+              Cookies and Tracking Technologies
+            </ParagraphLink1>
+            <Paragraph1>
+              Our website uses cookies to enhance your experience. Cookies help
+              us:
+              <br />
+              - Remember your login details and preferences.
+              <br />
+              - Analyze website performance and usage.
+              <br />
+              You can adjust your browser settings to manage cookies, but some
+              features of the website may not function properly without them.
+            </Paragraph1>
+          </div>
+
+          <div>
+            <ParagraphLink1 className="font-bold text-primary">
+              Data Security
+            </ParagraphLink1>
+            <Paragraph1>
+              We implement robust security measures to protect your data from
+              unauthorized access, alteration, or disclosure. However, no online
+              platform is entirely secure, so we recommend safeguarding your
+              account credentials.
             </Paragraph1>
           </div>
 
@@ -101,32 +133,36 @@ function Overview() {
             <Paragraph1>
               You have the right to:
               <br />
-              - Access, correct, or delete your personal details.
+              - Access the personal information we hold about you.
               <br />
-              - Unsubscribe from marketing emails at any time.
-              <br />- Manage cookies through your browser settings.
+              - Request corrections to inaccurate or outdated information.
+              <br />
+              - Request the deletion of your account and associated data.
+              <br />
+              To exercise these rights, please contact us using the details
+              below.
             </Paragraph1>
           </div>
 
           <div>
             <ParagraphLink1 className="font-bold text-primary">
-              Links to External Websites
+              Changes to this Policy
             </ParagraphLink1>
             <Paragraph1>
-              Our website may include links to third-party platforms. We
-              encourage you to review their privacy policies, as we are not
-              responsible for their practices.
+              We may update this Privacy Policy from time to time. Continued use
+              of our website after any changes implies acceptance of the updated
+              policy. Please review this page periodically for updates.
             </Paragraph1>
           </div>
 
           <div>
             <ParagraphLink1 className="font-bold text-primary">
-              Changes to Our Privacy Policy
+              Contact Us
             </ParagraphLink1>
             <Paragraph1>
-              Updates to this policy may occur periodically. All changes will be
-              published here with an effective date. We recommend reviewing this
-              policy regularly.
+              If you have questions or concerns about our Privacy Policy, please
+              contact our support team via email or through the contact form on
+              our website.
             </Paragraph1>
           </div>
         </div>

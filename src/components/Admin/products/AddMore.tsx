@@ -101,7 +101,9 @@ function AddMore() {
     currentPrice: Yup.number().required("Current price is required"),
     oldPrice: Yup.number().required("Old price is required"),
     availableAmount: Yup.number().required("Avaliable quantity is required"),
-    productWeight: Yup.number().required("Product weight quantity is required"),
+    productWeight: Yup.number().required(
+      "Packaging cost is required"
+    ),
 
     category: Yup.string().required("Category is required"),
     description: Yup.string().required("Description is required"),
@@ -512,6 +514,7 @@ function AddMore() {
                           placeholder="Enter Product Available Quantity"
                           className="w-full outline-none border-primary border p-2 rounded-lg my-2"
                         />
+
                         <ErrorMessage
                           name="availableAmount"
                           component="div"
@@ -519,13 +522,26 @@ function AddMore() {
                         />
                       </div>{" "}
                       <div>
-                        <label>Product Weight</label>
-                        <Field
-                          name="productWeight"
-                          type="text"
-                          placeholder="Enter Product Available Quantity"
-                          className="w-full outline-none border-primary border p-2 rounded-lg my-2"
-                        />
+                        <label>Packaging Cost</label>
+                       
+                        <Field name="productWeight">
+                          {({ field, form }: FieldProps<string>) => (
+                            <input
+                              {...field}
+                              type="text"
+                              placeholder="Enter Packaging Price"
+                              value={formatCurrency(field.value || "")}
+                              onChange={(e) => {
+                                const rawValue = e.target.value.replace(
+                                  /\D/g,
+                                  ""
+                                ); // Extract raw numeric value
+                                form.setFieldValue("productWeight", rawValue);
+                              }}
+                              className="w-full outline-none border-primary border p-2 rounded-lg my-2"
+                            />
+                          )}
+                        </Field>
                         <ErrorMessage
                           name="productWeight"
                           component="div"

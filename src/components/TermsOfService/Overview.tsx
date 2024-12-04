@@ -16,15 +16,16 @@ function Overview() {
     <div className="pt-[10px] bg-bg_gray">
       <div data-aos="flip-right" className="container1">
         <div className="relative overflow-hidden">
-          <div className="flex flex-col bg-primary sm:gap-[20px] px-4 sm:p-[65px] py-12 sm:py- rounded-t-[24px] w-full sm:text-center text-white">
+          <div className="flex flex-col bg-primary sm:gap-[20px] px-4 sm:p-[65px] py-12 mt-[50px]  w-full sm:text-center text-white">
             <Header1Plus>Terms and Conditions</Header1Plus>
             <Paragraph3>
-              Welcome to GrandioseGrin! By using our website and services, you
-              agree to the following terms and conditions. Please read them
-              carefully to ensure a smooth and enjoyable shopping experience.
+              Welcome to Lala Healthy Foods! By using our website and services,
+              you agree to the following terms and conditions. Please read them
+              carefully to ensure a smooth and enjoyable experience ordering
+              healthy meals online.
             </Paragraph3>
           </div>
-          <div className="absolute sm:-bottom-[200px] -bottom-[60px] overflow-hidden flex w-full">
+          <div className="absolute hidden sm:-bottom-[200px] -bottom-[60px] overflow-hidden flex- w-full">
             <img
               className="min-w-full"
               src="/images/white_bgR.svg"
@@ -39,7 +40,7 @@ function Overview() {
               Use of Website
             </ParagraphLink1>
             <Paragraph1>
-              By accessing GrandioseGrin, you agree to use our platform for
+              By accessing Lala Healthy Foods, you agree to use our platform for
               lawful purposes only. Any misuse, such as attempting to harm the
               website or its users, is strictly prohibited.
             </Paragraph1>
@@ -61,7 +62,7 @@ function Overview() {
               Orders and Payments
             </ParagraphLink1>
             <Paragraph1>
-              - Order Confirmation: Orders placed on GrandioseGrin are
+              - Order Confirmation: Orders placed on Lala Healthy Foods are
               subject to availability. We reserve the right to cancel orders for
               any reason, including errors in pricing or stock levels.
               <br />- Payment: All payments must be completed at checkout.
@@ -75,9 +76,10 @@ function Overview() {
               Shipping and Delivery
             </ParagraphLink1>
             <Paragraph1>
-              We aim to deliver your orders promptly. However, delivery times
-              may vary due to unforeseen circumstances. Shipping costs and
-              timelines are displayed during checkout.
+              We strive to deliver your orders promptly and accurately. Delivery
+              times may vary based on your location and order volume. Delivery
+              charges, timelines, and pickup options are displayed during
+              checkout.
             </Paragraph1>
           </div>
 
@@ -86,17 +88,19 @@ function Overview() {
               Returns and Refunds
             </ParagraphLink1>
             <Paragraph1>
-              - Eligibility: Returns are accepted for unopened and unused
-              products within 30 days of delivery.
+              - Eligibility: Returns or refunds are only applicable for
+              incorrect or defective orders. Requests must be made within 24
+              hours of delivery.
               <br />
-              - Refunds: Approved returns will be refunded to the original
-              payment method. Shipping fees are non-refundable.
-              <br />- Exclusions: Customized or perishable products are not
-              eligible for returns.
+              - Refunds: Approved refunds will be processed to the original
+              payment method. Please note that delivery charges are
+              non-refundable.
+              <br />- Exclusions: Perishable or customized meal orders are not
+              eligible for returns or refunds.
             </Paragraph1>
           </div>
 
-          <div>
+          <div className=" hidden">
             <ParagraphLink1 className="font-bold text-primary">
               Intellectual Property
             </ParagraphLink1>
@@ -112,9 +116,9 @@ function Overview() {
               Limitation of Liability
             </ParagraphLink1>
             <Paragraph1>
-              GrandioseGrin is not liable for any indirect, incidental, or
+              Lala Healthy Foods is not liable for any indirect, incidental, or
               consequential damages arising from the use of our website or
-              products, to the maximum extent permitted by law.
+              services, to the maximum extent permitted by law.
             </Paragraph1>
           </div>
 

@@ -16,7 +16,7 @@ import useUserInfoStore from "@/stores/userInfoStore"; // Import the user info s
 import html2canvas from "html2canvas";
 import { useExchangeRateStore } from "@/stores/exchangeRateStore";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
-import { HeaderAny, ParagraphLink1, ParagraphLink2 } from "@/components/Text";
+import { HeaderAny, Paragraph2, ParagraphLink1, ParagraphLink2 } from "@/components/Text";
 import { usePaystackPayment } from "react-paystack";
 
 type Product = {
@@ -674,6 +674,30 @@ const Checkout: React.FC<CheckoutProps> = ({
                   className="mt-1 block h-[100px] w-full p-2 border rounded-md"
                   placeholder="Add a message, ask for meal recommendations, or include special instructions for your order  or write a note for your friend if this is a gift..."
                 />
+              </div>
+
+              <div>
+                <Paragraph2 className="text-[12px] text-gray-400">
+                  By clicking "Next," you agree to our{" "}
+                  <span>
+                    <a
+                      href="/terms-of-service"
+                      className="outline-none text-primary font-bold hover:underline"
+                    >
+                      Terms of Service
+                    </a>
+                  </span>{" "}
+                  and{" "}
+                  <span>
+                    <a
+                      href="/privacy-policy"
+                      className="outline-none text-primary font-bold hover:underline"
+                    >
+                      Privacy Policy
+                    </a>
+                  </span>
+                  .
+                </Paragraph2>
               </div>
               <button
                 type="submit"
