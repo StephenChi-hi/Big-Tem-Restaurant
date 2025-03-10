@@ -52,4 +52,6 @@ export const useCartCount = () =>
     state.cart.reduce((total, item) => total + item.quantity, 0)
   );
 
+  
+
 export default useCartStore;
